@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="{{ current_lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sem EGLOH LOKOH - Data Scientist & AI Engineer</title>
+    <meta name="description" content="Portfolio de Sem EGLOH LOKOH, Data Scientist et ingénieur IA spécialisé en Machine Learning, analyse de données et solutions d'intelligence artificielle.">
+    <meta property="og:title" content="Sem EGLOH LOKOH - Data Scientist & AI Engineer">
+    <meta property="og:description" content="5 années d'expérience en développement de modèles ML et solutions IA">
+    <meta property="og:type" content="website">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Typed.js -->
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <div class="nav__logo">
+                <a href="#home">Sem EGLOH LOKOH</a>
+            </div>
+            
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="#presentation" class="nav__link">{{ texts.nav.presentation }}</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#experiences" class="nav__link">{{ texts.nav.experiences }}</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#projects" class="nav__link">{{ texts.nav.projects }}</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#contact" class="nav__link nav__cta">{{ texts.nav.contact }}</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="nav__actions">
+                <div class="language-switcher">
+                    <a href="?lang=fr" class="lang-btn {{ 'active' if current_lang == 'fr' else '' }}">FR</a>
+                    <a href="?lang=en" class="lang-btn {{ 'active' if current_lang == 'en' else '' }}">EN</a>
+                </div>
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero__bg"></div>
+        <div class="hero__container container">
+            <div class="hero__content">
+                <h1 class="hero__title">
+                    <span id="typed-text"></span>
+                </h1>
+                <p class="hero__subtitle">{{ texts.hero.subtitle }}</p>
+                <a href="#presentation" class="hero__cta">
+                    <span>Découvrir mon profil</span>
+                    <i class="fas fa-arrow-down"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about section" id="presentation">
+        <div class="container">
+            <h2 class="section__title">{{ texts.about.title }}</h2>
+            
+            <div class="about__container">
+                <div class="about__info">
+                    <div class="about__profile">
+                        <div class="about__image">
+                            <img src="{{ url_for('static', filename='img/A127B5E8-EAA6-4DA7-A61A-D17E593B515D.jpeg') }}" alt="Sem EGLOH LOKOH" class="about__img">
+                        </div>
+                        <div class="about__details">
+                            <h3 class="about__name">Sem EGLOH LOKOH</h3>
+                            <p class="about__role">{{ texts.about.role }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="about__skills">
+                        <h4 class="skills__title">{{ texts.skills.title }}</h4>
+                        <div class="skills__tags">
+                            <span class="skill__tag">Data Science</span>
+                            <span class="skill__tag">AI Implementation</span>
+                            <span class="skill__tag">Analytics</span>
+                            <span class="skill__tag">Generative AI</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about__bio">
+                    {% for paragraph in texts.about.bio %}
+                    <p class="about__text">{{ paragraph }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience section" id="experiences">
+        <div class="container">
+            <h2 class="section__title">{{ texts.experiences.title }}</h2>
+            
+            <div class="experience__container">
+                <div class="experience__cards">
+                    <!-- CGI FRANCE -->
+                    <div class="experience__card" data-experience="cgi">
+                        <div class="card__header">
+                            <div class="card__company">
+                                <h3>CGI FRANCE</h3>
+                                <span class="card__badge card__badge--current">Présent</span>
+                            </div>
+                            <i class="fas fa-chevron-down card__toggle"></i>
+                        </div>
+                        <div class="card__content">
+                            <div class="card__role">
+                                <h4>Consultant Data - DGFIP (FINANCES PUBLIQUES)</h4>
+                                <ul class="card__missions">
+                                    <li>Accompagnement & conduite du changement : support des agents DGFIP pour la migration des scripts legacy vers Python.</li>
+                                    <li>Développement Python : conception de packages pour automatiser la migration des données et du code SAS.</li>
+                                    <li>Migration & architecture cloud : transfert des données et conception d'une architecture intermédiaire vers une cible cloud.</li>
+                                    <li>Analyses métiers & conseil : identification des besoins, optimisation des processus et recommandations de bonnes pratiques.</li>
+                                </ul>
+                                <p class="card__tech"><strong>Environnement technique :</strong> Python</p>
+                            </div>
+                            
+                            <div class="card__role">
+                                <h4>Data Scientist - MONNOYEUR</h4>
+                                <ul class="card__missions">
+                                    <li>Développement de parseurs spécialisés pour l'analyse statique et l'identification des dépendances de champs et du code mort.</li>
+                                    <li>Conception de graphes de dépendances reliant champs et programmes pour évaluer l'impact des modifications de code.</li>
+                                    <li>Base de connaissance vectorielle : construction à partir de descriptions de chunks de code générées par LLM.</li>
+                                    <li>Automatisation via micro-services : analyse et requêtage du code en langage naturel.</li>
+                                </ul>
+                                <p class="card__tech"><strong>Environnement technique :</strong> Python, LangChain, Ollama, Pytest, NetworkX, RegEx, Deep Eval</p>
+                            </div>
+
+                            <div class="card__role">
+                                <h4>Consultant Data - SOCIETE GENERALE</h4>
+                                <ul class="card__missions">
+                                    <li>Conception et fiabilisation d'un système de migration des flux de données Talend vers un environnement interne client.</li>
+                                    <li>Développement Python : création d'un module pour la génération automatique de flux métiers.</li>
+                                    <li>Contrôle qualité & validation : mise en place de scripts de vérification et de validation des flux.</li>
+                                </ul>
+                                <p class="card__tech"><strong>Environnement technique :</strong> Python, PostgreSQL</p>
+                            </div>
+
+                            <div class="card__role">
+                                <h4>Data Scientist - SPECBOT</h4>
+                                <ul class="card__missions">
+                                    <li>Vectorisation & bases vectorielles : création et gestion d'une base ChromaDB.</li>
+                                    <li>RAG (Retrieval-Augmented Generation) : développement d'un système d'extraction d'informations à partir de fichiers Excel/PDF.</li>
+                                    <li>NLP & ranking : mise en œuvre d'approches de query rewriting, classification et priorisation.</li>
+                                    <li>Architecture logicielle : développement de micro-services et tests unitaires.</li>
+                                </ul>
+                                <p class="card__tech"><strong>Environnement technique :</strong> Python, LangChain, Docker, Deep Eval, Flask, Pytest</p>
+                            </div>
+                            
+                            <div class="card__role">
+                                <h4>Consultant Data - AG2R LA MONDIALE</h4>
+                                <ul class="card__missions">
+                                    <li>Cadrage fonctionnel & recueil des besoins métiers, analyses et restitution client.</li>
+                                    <li>Développement Python (modules, backend Flask) et bases de données relationnelles (SQL).</li>
+                                    <li>Industrialisation & optimisation : automatisation de processus, intégration continue et DevOps.</li>
+                                    <li>Gestion de projet agile : suivi et coordination via JIRA.</li>
+                                </ul>
+                                <p class="card__tech"><strong>Environnement technique :</strong> Python, SQL, JIRA, UML, MCD, API, GitLab, DevOps</p>
+                            </div>
+
+                            <div class="card__role">
+                                <h4>Data Scientist - REVITALISE</h4>
+                                <ul class="card__missions">
+                                    <li>Recherche & état de l'art : étude des approches de classification et de similarité des séries temporelles.</li>
+                                    <li>Feature engineering avancé : développement de classes pour l'extraction de features (DTW, Shapelet, Time Forest).</li>
+                                    <li>Modélisation & machine learning : classification des signaux et détection de changements temporels.</li>
+                                    <li>Évaluation & benchmark : comparaison et analyse de performance des différentes approches.</li>
+                                </ul>
+                                <p class="card__tech"><strong>Environnement technique :</strong> Python, PyTorch</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BPCE -->
+                    <div class="experience__card" data-experience="bpce">
+                        <div class="card__header">
+                            <div class="card__company">
+                                <h3>BPCE</h3>
+                                <span class="card__badge card__badge--previous">Précédente</span>
+                            </div>
+                            <i class="fas fa-chevron-down card__toggle"></i>
+                        </div>
+                        <div class="card__content">
+                            <div class="card__role">
+                                <h4>Data Scientist – Lutte Anti-Blanchiment</h4>
+                                <ul class="card__missions">
+                                    <li>Data acquisition : récupération de données via scraping et APIs (INPI – open data).</li>
+                                    <li>Développement applicatif : conception d'une application web de génération automatique de graphes.</li>
+                                    <li>Analyse de graphes & machine learning : modélisation de graphes multi-couches pour la détection de liens suspects.</li>
+                                    <li>Industrialisation & optimisation : automatisation et déploiement en production.</li>
+                                </ul>
+                                <p class="card__tech"><strong>Environnement technique :</strong> Python, R, SQL, PySpark, PyTorch, NetworkX, Pyvis, BeautifulSoup, Flask, Azure, Docker, API REST, Git</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ALLIANZ -->
+                    <div class="experience__card" data-experience="allianz">
+                        <div class="card__header">
+                            <div class="card__company">
+                                <h3>ALLIANZ FRANCE</h3>
+                                <span class="card__badge card__badge--previous">Précédente</span>
+                            </div>
+                            <i class="fas fa-chevron-down card__toggle"></i>
+                        </div>
+                        <div class="card__content">
+                            <div class="card__role">
+                                <h4>Data Scientist - Risques Climatiques</h4>
+                                <ul class="card__missions">
+                                    <li>Pilotage sinistres climatiques : dashboarding Excel/VBA, datamart, cadrage besoins métiers.</li>
+                                    <li>Analyses spatiales & géomatiques : géocodage, shapefiles, IGN, interpolations.</li>
+                                    <li>Data engineering : constitution bases d'apprentissage, préparation données.</li>
+                                    <li>Modélisation prédictive : classification binaire (inondations ruissellement), sinistres sécheresse.</li>
+                                </ul>
+                                <p class="card__tech"><strong>Environnement technique :</strong> Python, Scikit-Learn, TensorFlow, XGBoost, SAS, SQL, PySpark, VBA, Excel, ArcGIS</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technical Skills -->
+                <div class="tech-skills">
+                    <h3 class="tech-skills__title">Outils et Technologies</h3>
+                    <div class="tech-skills__categories">
+                        <div class="tech-category">
+                            <h4>Programmation</h4>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Azure</span>
+                                <span class="tech-tag">Flask</span>
+                                <span class="tech-tag">PySpark</span>
+                                <span class="tech-tag">Git</span>
+                            </div>
+                        </div>
+                        <div class="tech-category">
+                            <h4>Bases de données</h4>
+                            <div class="tech-tags">
+                                <span class="tech-tag">SQL</span>
+                                <span class="tech-tag">NoSQL</span>
+                            </div>
+                        </div>
+                        <div class="tech-category">
+                            <h4>Calculs et apprentissage</h4>
+                            <div class="tech-tags">
+                                <span class="tech-tag">PyTorch</span>
+                                <span class="tech-tag">Scikit-Learn</span>
+                            </div>
+                        </div>
+                        <div class="tech-category">
+                            <h4>DevOps</h4>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Docker</span>
+                                <span class="tech-tag">Microservices</span>
+                                <span class="tech-tag">System Design</span>
+                            </div>
+                        </div>
+                        <div class="tech-category">
+                            <h4>Systèmes</h4>
+                            <div class="tech-tags">
+                                <span class="tech-tag">Linux</span>
+                                <span class="tech-tag">Mac</span>
+                                <span class="tech-tag">Cloud</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education Timeline -->
+                <div class="education">
+                    <h3 class="education__title">{{ texts.experiences.formation_title }}</h3>
+                    <div class="timeline">
+                        <div class="timeline__item">
+                            <div class="timeline__marker"></div>
+                            <div class="timeline__content">
+                                <div class="timeline__year">2022</div>
+                                <h4 class="timeline__title">Master Data Science and Business Analysis</h4>
+                                <p class="timeline__institution">EDC Paris Business School</p>
+                            </div>
+                        </div>
+                        <div class="timeline__item">
+                            <div class="timeline__marker"></div>
+                            <div class="timeline__content">
+                                <div class="timeline__year">2020</div>
+                                <h4 class="timeline__title">Licence Professionnelle Métiers du décisionnel et de la statistique</h4>
+                                <p class="timeline__institution">Aix Marseille Université</p>
+                            </div>
+                        </div>
+                        <div class="timeline__item">
+                            <div class="timeline__marker"></div>
+                            <div class="timeline__content">
+                                <div class="timeline__year">2019</div>
+                                <h4 class="timeline__title">Licence Professionnelle Statistique Économique</h4>
+                                <p class="timeline__institution">École Nationale d'Économie Appliquée (ENEAM)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects section" id="projects">
+        <div class="container">
+            <h2 class="section__title">{{ texts.projects.title }}</h2>
+            
+            <div class="projects__filters">
+                <button class="filter__btn active" data-filter="all">{{ texts.projects.all }}</button>
+                <button class="filter__btn" data-filter="osint">{{ texts.projects.osint }}</button>
+                <button class="filter__btn" data-filter="ai">{{ texts.projects.ai }}</button>
+                <button class="filter__btn" data-filter="web">{{ texts.projects.web }}</button>
+            </div>
+
+            <div class="projects__container">
+                <div class="project__card" data-category="osint ai">
+                    <div class="project__image">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <div class="project__content">
+                        <h3 class="project__title">OSINT Graph Explorer</h3>
+                        <p class="project__description">
+                            OSINT Graph Explorer is a cutting-edge application designed for Open Source Intelligence (OSINT) gathering. 
+                            It crawls the internet to collect information about individuals and companies, then visualizes this data in an 
+                            interactive graph and dashboard. This tool is invaluable for researchers, investigative journalists, and security 
+                            professionals who need to uncover connections and gather insights from publicly available data.
+                        </p>
+                        <div class="project__tags">
+                            <span class="project__tag">Python</span>
+                            <span class="project__tag">Graph Analysis</span>
+                            <span class="project__tag">OSINT</span>
+                            <span class="project__tag">Data Visualization</span>
+                        </div>
+                        <div class="project__links">
+                            <a href="https://github.com/SemPhares/osint_crawler" class="project__link" target="_blank">
+                                <i class="fab fa-github"></i>
+                                <span>Code source</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project__card" data-category="ai web">
+                    <div class="project__image">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <div class="project__content">
+                        <h3 class="project__title">Document Translator</h3>
+                        <p class="project__description">
+                            Document Translator is an application designed to translate documents effortlessly using advanced AI models 
+                            from Gemini or OpenAI Chat. This tool simplifies the process of translating various document formats, 
+                            providing users with quick and accurate translations.
+                        </p>
+                        <div class="project__tags">
+                            <span class="project__tag">Python</span>
+                            <span class="project__tag">AI Translation</span>
+                            <span class="project__tag">Gemini</span>
+                            <span class="project__tag">OpenAI</span>
+                            <span class="project__tag">Document Processing</span>
+                        </div>
+                        <div class="project__links">
+                            <a href="https://github.com/SemPhares/document_translator" class="project__link" target="_blank">
+                                <i class="fab fa-github"></i>
+                                <span>Code source</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact section" id="contact">
+        <div class="container">
+            <h2 class="section__title">{{ texts.contact.title }}</h2>
+            
+            <div class="contact__container">
+                <div class="contact__form">
+                    <form id="contact-form" class="form">
+                        <div class="form__group">
+                            <label for="name" class="form__label">{{ texts.contact.name }}</label>
+                            <input type="text" id="name" name="name" class="form__input" required>
+                        </div>
+                        
+                        <div class="form__group">
+                            <label for="email" class="form__label">{{ texts.contact.email }}</label>
+                            <input type="email" id="email" name="email" class="form__input" required>
+                        </div>
+                        
+                        <div class="form__group">
+                            <label for="message" class="form__label">{{ texts.contact.message }}</label>
+                            <textarea id="message" name="message" class="form__textarea" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="form__submit">
+                            <span>{{ texts.contact.send }}</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="contact__info">
+                    <div class="contact__social">
+                        <h3>Retrouvez-moi sur</h3>
+                        <div class="social__links">
+                            <a href="https://www.linkedin.com/in/sem-egloh-lokoh" class="social__link" target="_blank">
+                                <i class="fab fa-linkedin"></i>
+                                <span>LinkedIn</span>
+                            </a>
+                            <a href="https://github.com/SemPhares" class="social__link" target="_blank">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                            </a>
+                            <a href="mailto:sem_phares@yahoo.com" class="social__link">
+                                <i class="fas fa-envelope"></i>
+                                <span>Email</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <p class="footer__copy">
+                    &copy; 2025 Sem EGLOH LOKOH. Tous droits réservés.
+                </p>
+                <p class="footer__email">
+                    <a href="mailto:sem_phares@yahoo.com">sem_phares@yahoo.com</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    <script>
+        // Initialize Typed.js
+        document.addEventListener('DOMContentLoaded', function() {
+            const typedTexts = {{ texts.hero.typed_text | tojson }};
+            
+            new Typed('#typed-text', {
+                strings: typedTexts,
+                typeSpeed: 80,
+                backSpeed: 50,
+                backDelay: 2000,
+                loop: true,
+                showCursor: true,
+                cursorChar: '|'
+            });
+        });
+    </script>
+</body>
+</html>
