@@ -907,12 +907,17 @@ a {
 }
 
 .footer__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   color: var(--text-secondary);
+  gap: 0.5rem;
 }
 
 .footer__copy {
-  margin-bottom: 0.5rem;
+  margin: 0;
 }
 
 .footer__email a {

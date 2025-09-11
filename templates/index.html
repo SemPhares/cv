@@ -68,7 +68,7 @@
                 </h1>
                 <p class="hero__subtitle">{{ texts.hero.subtitle }}</p>
                 <a href="#presentation" class="hero__cta">
-                    <span>Découvrir mon profil</span>
+                    <span>{{ texts.hero.cta_text }}</span>
                     <i class="fas fa-arrow-down"></i>
                 </a>
             </div>
@@ -123,76 +123,23 @@
                     <div class="experience__card" data-experience="cgi">
                         <div class="card__header">
                             <div class="card__company">
-                                <h3>CGI FRANCE</h3>
-                                <span class="card__badge card__badge--current">Présent</span>
+                                <h3>{{ texts.experiences.companies.cgi.name }}</h3>
+                                <span class="card__badge card__badge--current">{{ texts.experiences.present }}</span>
                             </div>
                             <i class="fas fa-chevron-down card__toggle"></i>
                         </div>
                         <div class="card__content">
+                            {% for role in texts.experiences.companies.cgi.roles %}
                             <div class="card__role">
-                                <h4>Consultant Data - DGFIP (FINANCES PUBLIQUES)</h4>
+                                <h4>{{ role.title }}</h4>
                                 <ul class="card__missions">
-                                    <li>Accompagnement & conduite du changement : support des agents DGFIP pour la migration des scripts legacy vers Python.</li>
-                                    <li>Développement Python : conception de packages pour automatiser la migration des données et du code SAS.</li>
-                                    <li>Migration & architecture cloud : transfert des données et conception d'une architecture intermédiaire vers une cible cloud.</li>
-                                    <li>Analyses métiers & conseil : identification des besoins, optimisation des processus et recommandations de bonnes pratiques.</li>
+                                    {% for mission in role.missions %}
+                                    <li>{{ mission }}</li>
+                                    {% endfor %}
                                 </ul>
-                                <p class="card__tech"><strong>Environnement technique :</strong> Python</p>
+                                <p class="card__tech"><strong>{{ texts.experiences.technical_environment }} :</strong> {{ role.tech }}</p>
                             </div>
-                            
-                            <div class="card__role">
-                                <h4>Data Scientist - MONNOYEUR</h4>
-                                <ul class="card__missions">
-                                    <li>Développement de parseurs spécialisés pour l'analyse statique et l'identification des dépendances de champs et du code mort.</li>
-                                    <li>Conception de graphes de dépendances reliant champs et programmes pour évaluer l'impact des modifications de code.</li>
-                                    <li>Base de connaissance vectorielle : construction à partir de descriptions de chunks de code générées par LLM.</li>
-                                    <li>Automatisation via micro-services : analyse et requêtage du code en langage naturel.</li>
-                                </ul>
-                                <p class="card__tech"><strong>Environnement technique :</strong> Python, LangChain, Ollama, Pytest, NetworkX, RegEx, Deep Eval</p>
-                            </div>
-
-                            <div class="card__role">
-                                <h4>Consultant Data - SOCIETE GENERALE</h4>
-                                <ul class="card__missions">
-                                    <li>Conception et fiabilisation d'un système de migration des flux de données Talend vers un environnement interne client.</li>
-                                    <li>Développement Python : création d'un module pour la génération automatique de flux métiers.</li>
-                                    <li>Contrôle qualité & validation : mise en place de scripts de vérification et de validation des flux.</li>
-                                </ul>
-                                <p class="card__tech"><strong>Environnement technique :</strong> Python, PostgreSQL</p>
-                            </div>
-
-                            <div class="card__role">
-                                <h4>Data Scientist - SPECBOT</h4>
-                                <ul class="card__missions">
-                                    <li>Vectorisation & bases vectorielles : création et gestion d'une base ChromaDB.</li>
-                                    <li>RAG (Retrieval-Augmented Generation) : développement d'un système d'extraction d'informations à partir de fichiers Excel/PDF.</li>
-                                    <li>NLP & ranking : mise en œuvre d'approches de query rewriting, classification et priorisation.</li>
-                                    <li>Architecture logicielle : développement de micro-services et tests unitaires.</li>
-                                </ul>
-                                <p class="card__tech"><strong>Environnement technique :</strong> Python, LangChain, Docker, Deep Eval, Flask, Pytest</p>
-                            </div>
-                            
-                            <div class="card__role">
-                                <h4>Consultant Data - AG2R LA MONDIALE</h4>
-                                <ul class="card__missions">
-                                    <li>Cadrage fonctionnel & recueil des besoins métiers, analyses et restitution client.</li>
-                                    <li>Développement Python (modules, backend Flask) et bases de données relationnelles (SQL).</li>
-                                    <li>Industrialisation & optimisation : automatisation de processus, intégration continue et DevOps.</li>
-                                    <li>Gestion de projet agile : suivi et coordination via JIRA.</li>
-                                </ul>
-                                <p class="card__tech"><strong>Environnement technique :</strong> Python, SQL, JIRA, UML, MCD, API, GitLab, DevOps</p>
-                            </div>
-
-                            <div class="card__role">
-                                <h4>Data Scientist - REVITALISE</h4>
-                                <ul class="card__missions">
-                                    <li>Recherche & état de l'art : étude des approches de classification et de similarité des séries temporelles.</li>
-                                    <li>Feature engineering avancé : développement de classes pour l'extraction de features (DTW, Shapelet, Time Forest).</li>
-                                    <li>Modélisation & machine learning : classification des signaux et détection de changements temporels.</li>
-                                    <li>Évaluation & benchmark : comparaison et analyse de performance des différentes approches.</li>
-                                </ul>
-                                <p class="card__tech"><strong>Environnement technique :</strong> Python, PyTorch</p>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
 
@@ -200,22 +147,23 @@
                     <div class="experience__card" data-experience="bpce">
                         <div class="card__header">
                             <div class="card__company">
-                                <h3>BPCE</h3>
-                                <span class="card__badge card__badge--previous">Précédente</span>
+                                <h3>{{ texts.experiences.companies.bpce.name }}</h3>
+                                <span class="card__badge card__badge--previous">{{ texts.experiences.previous }}</span>
                             </div>
                             <i class="fas fa-chevron-down card__toggle"></i>
                         </div>
                         <div class="card__content">
+                            {% for role in texts.experiences.companies.bpce.roles %}
                             <div class="card__role">
-                                <h4>Data Scientist – Lutte Anti-Blanchiment</h4>
+                                <h4>{{ role.title }}</h4>
                                 <ul class="card__missions">
-                                    <li>Data acquisition : récupération de données via scraping et APIs (INPI – open data).</li>
-                                    <li>Développement applicatif : conception d'une application web de génération automatique de graphes.</li>
-                                    <li>Analyse de graphes & machine learning : modélisation de graphes multi-couches pour la détection de liens suspects.</li>
-                                    <li>Industrialisation & optimisation : automatisation et déploiement en production.</li>
+                                    {% for mission in role.missions %}
+                                    <li>{{ mission }}</li>
+                                    {% endfor %}
                                 </ul>
-                                <p class="card__tech"><strong>Environnement technique :</strong> Python, R, SQL, PySpark, PyTorch, NetworkX, Pyvis, BeautifulSoup, Flask, Azure, Docker, API REST, Git</p>
+                                <p class="card__tech"><strong>{{ texts.experiences.technical_environment }} :</strong> {{ role.tech }}</p>
                             </div>
+                            {% endfor %}
                         </div>
                     </div>
 
@@ -223,32 +171,33 @@
                     <div class="experience__card" data-experience="allianz">
                         <div class="card__header">
                             <div class="card__company">
-                                <h3>ALLIANZ FRANCE</h3>
-                                <span class="card__badge card__badge--previous">Précédente</span>
+                                <h3>{{ texts.experiences.companies.allianz.name }}</h3>
+                                <span class="card__badge card__badge--previous">{{ texts.experiences.previous }}</span>
                             </div>
                             <i class="fas fa-chevron-down card__toggle"></i>
                         </div>
                         <div class="card__content">
+                            {% for role in texts.experiences.companies.allianz.roles %}
                             <div class="card__role">
-                                <h4>Data Scientist - Risques Climatiques</h4>
+                                <h4>{{ role.title }}</h4>
                                 <ul class="card__missions">
-                                    <li>Pilotage sinistres climatiques : dashboarding Excel/VBA, datamart, cadrage besoins métiers.</li>
-                                    <li>Analyses spatiales & géomatiques : géocodage, shapefiles, IGN, interpolations.</li>
-                                    <li>Data engineering : constitution bases d'apprentissage, préparation données.</li>
-                                    <li>Modélisation prédictive : classification binaire (inondations ruissellement), sinistres sécheresse.</li>
+                                    {% for mission in role.missions %}
+                                    <li>{{ mission }}</li>
+                                    {% endfor %}
                                 </ul>
-                                <p class="card__tech"><strong>Environnement technique :</strong> Python, Scikit-Learn, TensorFlow, XGBoost, SAS, SQL, PySpark, VBA, Excel, ArcGIS</p>
+                                <p class="card__tech"><strong>{{ texts.experiences.technical_environment }} :</strong> {{ role.tech }}</p>
                             </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
 
                 <!-- Technical Skills -->
                 <div class="tech-skills">
-                    <h3 class="tech-skills__title">Outils et Technologies</h3>
+                    <h3 class="tech-skills__title">{{ texts.tech_skills.title }}</h3>
                     <div class="tech-skills__categories">
                         <div class="tech-category">
-                            <h4>Programmation</h4>
+                            <h4>{{ texts.tech_skills.categories.programming }}</h4>
                             <div class="tech-tags">
                                 <span class="tech-tag">Python</span>
                                 <span class="tech-tag">Azure</span>
@@ -258,21 +207,21 @@
                             </div>
                         </div>
                         <div class="tech-category">
-                            <h4>Bases de données</h4>
+                            <h4>{{ texts.tech_skills.categories.databases }}</h4>
                             <div class="tech-tags">
                                 <span class="tech-tag">SQL</span>
                                 <span class="tech-tag">NoSQL</span>
                             </div>
                         </div>
                         <div class="tech-category">
-                            <h4>Calculs et apprentissage</h4>
+                            <h4>{{ texts.tech_skills.categories.ml_computing }}</h4>
                             <div class="tech-tags">
                                 <span class="tech-tag">PyTorch</span>
                                 <span class="tech-tag">Scikit-Learn</span>
                             </div>
                         </div>
                         <div class="tech-category">
-                            <h4>DevOps</h4>
+                            <h4>{{ texts.tech_skills.categories.devops }}</h4>
                             <div class="tech-tags">
                                 <span class="tech-tag">Docker</span>
                                 <span class="tech-tag">Microservices</span>
@@ -280,7 +229,7 @@
                             </div>
                         </div>
                         <div class="tech-category">
-                            <h4>Systèmes</h4>
+                            <h4>{{ texts.tech_skills.categories.systems }}</h4>
                             <div class="tech-tags">
                                 <span class="tech-tag">Linux</span>
                                 <span class="tech-tag">Mac</span>
@@ -294,30 +243,16 @@
                 <div class="education">
                     <h3 class="education__title">{{ texts.experiences.formation_title }}</h3>
                     <div class="timeline">
+                        {% for edu in texts.education %}
                         <div class="timeline__item">
                             <div class="timeline__marker"></div>
                             <div class="timeline__content">
-                                <div class="timeline__year">2022</div>
-                                <h4 class="timeline__title">Master Data Science and Business Analysis</h4>
-                                <p class="timeline__institution">EDC Paris Business School</p>
+                                <div class="timeline__year">{{ edu.year }}</div>
+                                <h4 class="timeline__title">{{ edu.title }}</h4>
+                                <p class="timeline__institution">{{ edu.institution }}</p>
                             </div>
                         </div>
-                        <div class="timeline__item">
-                            <div class="timeline__marker"></div>
-                            <div class="timeline__content">
-                                <div class="timeline__year">2020</div>
-                                <h4 class="timeline__title">Licence Professionnelle Métiers du décisionnel et de la statistique</h4>
-                                <p class="timeline__institution">Aix Marseille Université</p>
-                            </div>
-                        </div>
-                        <div class="timeline__item">
-                            <div class="timeline__marker"></div>
-                            <div class="timeline__content">
-                                <div class="timeline__year">2019</div>
-                                <h4 class="timeline__title">Licence Professionnelle Statistique Économique</h4>
-                                <p class="timeline__institution">École Nationale d'Économie Appliquée (ENEAM)</p>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -426,7 +361,7 @@
                 
                 <div class="contact__info">
                     <div class="contact__social">
-                        <h3>Retrouvez-moi sur</h3>
+                        <h3>{{ texts.contact.social_title }}</h3>
                         <div class="social__links">
                             <a href="https://www.linkedin.com/in/sem-egloh-lokoh" class="social__link" target="_blank">
                                 <i class="fab fa-linkedin"></i>
@@ -452,7 +387,7 @@
         <div class="container">
             <div class="footer__content">
                 <p class="footer__copy">
-                    &copy; 2025 Sem EGLOH LOKOH. Tous droits réservés.
+                    {{ texts.footer.copyright }}
                 </p>
                 <p class="footer__email">
                     <a href="mailto:sem_phares@yahoo.com">sem_phares@yahoo.com</a>
