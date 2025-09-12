@@ -413,6 +413,105 @@ a {
   text-align: justify;
 }
 
+/* ===== ACTIVITY SECTION ===== */
+.activity {
+  background: #1a2332;
+  padding: 4rem 0;
+}
+
+.activity__container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.activity__content {
+  background: var(--bg-card);
+  border-radius: var(--border-radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-lg);
+  transition: var(--transition);
+  border: 1px solid rgba(56, 189, 248, 0.1);
+}
+
+.activity__content:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl);
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.activity__header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.activity__name {
+  font-size: 1.8rem;
+  font-weight: var(--font-weight-bold);
+  margin: 0;
+  text-align: center;
+}
+
+.activity__link {
+  color: var(--text-primary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: var(--transition);
+  justify-content: center;
+}
+
+.activity__link:hover {
+  color: var(--accent-primary);
+  transform: translateX(5px);
+}
+
+.activity__link i {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.activity__description {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.activity__text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  text-align: justify;
+  margin: 0;
+}
+
+.activity__actions {
+  display: flex;
+  justify-content: center;
+}
+
+.activity__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--accent-gradient);
+  color: white;
+  text-decoration: none;
+  border-radius: var(--border-radius-full);
+  font-weight: var(--font-weight-medium);
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+}
+
+.activity__btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.activity__btn i {
+  font-size: 1rem;
+}
+
 /* ===== EXPERIENCE SECTION ===== */
 .experience {
   background: #1a2332;
@@ -1001,6 +1100,19 @@ a {
     text-align: justify;
   }
 
+  /* Activity */
+  .activity__content {
+    padding: 2rem;
+  }
+
+  .activity__name {
+    font-size: 1.5rem;
+  }
+
+  .activity__text {
+    font-size: 1rem;
+  }
+
   .about__image {
     width: 150px;
     height: 150px;
@@ -1083,6 +1195,24 @@ a {
   .about__image {
     width: 120px;
     height: 120px;
+  }
+
+  /* Activity */
+  .activity__content {
+    padding: 1.5rem;
+  }
+
+  .activity__name {
+    font-size: 1.3rem;
+  }
+
+  .activity__text {
+    font-size: 0.95rem;
+  }
+
+  .activity__btn {
+    padding: 0.65rem 1.25rem;
+    font-size: 0.9rem;
   }
 
   .projects__filters {

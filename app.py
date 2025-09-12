@@ -23,6 +23,7 @@ LANGUAGES = {
     'fr': {
         'nav': {
             'presentation': 'Présentation',
+            'activity': 'Activité',
             'experiences': 'Expériences',
             'projects': 'Projets',
             'contact': 'Contact'
@@ -41,6 +42,12 @@ LANGUAGES = {
                 'J\'ai démontré ma capacité à concevoir des solutions innovantes telles que la classification de séries temporelles, la modélisation de graphes et les systèmes RAG.',
                 'Mon expertise couvre l\'ensemble de la chaîne de valeur data, de l\'acquisition à la mise en production, en passant par l\'analyse et la visualisation.'
             ]
+        },
+        'activity': {
+            'title': 'Activité',
+            'link': 'https://easylife-planner-1ts9v6m.gamma.site/accueil-easylifeplanner',
+            'name': 'EasyLife Planner',
+            'description': 'Avec mon épouse nous avons lancé "EasyLife Planner", une structure qui propose des services sur mesure pour simplifier la vie quotidienne, notamment la planification personnalisée de repas et de voyages. L\'activité se concentre sur l\'organisation efficace du quotidien pour dégager du temps, réduire le stress et offrir des solutions totalement adaptées à chaque utilisateur, avec une touche d\'humour et beaucoup de bienveillance.'
         },
         'skills': {
             'title': 'Domaines d\'expertise'
@@ -197,6 +204,7 @@ LANGUAGES = {
     'en': {
         'nav': {
             'presentation': 'About',
+            'activity': 'Activity',
             'experiences': 'Experience',
             'projects': 'Projects',
             'contact': 'Contact'
@@ -215,6 +223,12 @@ LANGUAGES = {
                 'I have demonstrated my ability to design innovative solutions such as time series classification, graph modeling, and RAG systems.',
                 'My expertise covers the entire data value chain, from acquisition to production deployment, including analysis and visualization.'
             ]
+        },
+        'activity': {
+            'title': 'Activity',
+            'link': 'https://easylife-planner-1ts9v6m.gamma.site/accueil-easylifeplanner',
+            'name': 'EasyLife Planner',
+            'description': 'With my wife, we launched "EasyLife Planner", a structure that offers custom services to simplify daily life, including personalized meal and travel planning. The activity focuses on efficient daily organization to free up time, reduce stress and provide solutions totally adapted to each user, with a touch of humor and a lot of benevolence.'
         },
         'skills': {
             'title': 'Areas of Expertise'

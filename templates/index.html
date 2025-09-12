@@ -35,6 +35,9 @@
                         <a href="#presentation" class="nav__link">{{ texts.nav.presentation }}</a>
                     </li>
                     <li class="nav__item">
+                        <a href="#activity" class="nav__link">{{ texts.nav.activity }}</a>
+                    </li>
+                    <li class="nav__item">
                         <a href="#experiences" class="nav__link">{{ texts.nav.experiences }}</a>
                     </li>
                     <li class="nav__item">
@@ -107,6 +110,37 @@
                     {% for paragraph in texts.about.bio %}
                     <p class="about__text">{{ paragraph }}</p>
                     {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activity Section -->
+    <section class="activity section" id="activity">
+        <div class="container">
+            <h2 class="section__title">{{ texts.activity.title }}</h2>
+            
+            <div class="activity__container">
+                <div class="activity__content">
+                    <div class="activity__header">
+                        <h3 class="activity__name">
+                            <a href="{{ texts.activity.link }}" target="_blank" rel="noopener noreferrer" class="activity__link">
+                                {{ texts.activity.name }}
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </h3>
+                    </div>
+                    
+                    <div class="activity__description">
+                        <p class="activity__text">{{ texts.activity.description }}</p>
+                    </div>
+                    
+                    <div class="activity__actions">
+                        <a href="{{ texts.activity.link }}" target="_blank" rel="noopener noreferrer" class="activity__btn">
+                            <i class="fas fa-globe"></i>
+                            <span>Visiter le site</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
