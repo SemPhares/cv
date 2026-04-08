@@ -42,19 +42,6 @@ navLinks.forEach(link => {
     });
 });
 
-// ===== HEADER SCROLL EFFECT =====
-const header = document.querySelector('.header');
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 100) {
-        header.style.background = 'rgba(15, 23, 42, 0.98)';
-        header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-    } else {
-        header.style.background = 'rgba(15, 23, 42, 0.95)';
-        header.style.boxShadow = 'none';
-    }
-});
-
 // ===== EXPERIENCE CARDS TOGGLE =====
 const experienceCards = document.querySelectorAll('.experience__card');
 

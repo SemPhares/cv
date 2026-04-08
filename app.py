@@ -1,6 +1,9 @@
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, render_template, request, jsonify, session, send_from_directory
 import os
+from dotenv import load_dotenv
 import smtplib
+
+load_dotenv()  # charge automatiquement le fichier .env
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import traceback
@@ -25,22 +28,24 @@ LANGUAGES = {
             'presentation': 'Présentation',
             'activity': 'Activité',
             'experiences': 'Expériences',
-            'projects': 'Projets',
+            'services': 'Services',
             'contact': 'Contact'
         },
         'hero': {
-            'typed_text': ['INGÉNIERIE IA', 'ANALYSE DE DONNÉES', 'INNOVATION'],
-            'subtitle': '"Les données sont le nouveau pétrole, mais contrairement au pétrole, plus on les partage, plus elles prennent de la valeur !" 🚀',
-            'cta_text': 'Découvrir mon profil'
+            'typed_text': ['ARCHITECTE IA', 'PIPELINES LLM & RAG', 'LEAD TECHNIQUE'],
+            'subtitle': 'Vous avez un problème métier. Je conçois la solution IA qui le résout — de l\'architecture au déploiement.',
+            'cta_text': 'Découvrir mon profil',
+            'cta_download': 'Télécharger mon CV',
+            'cta_linkedin': 'Me contacter sur LinkedIn'
         },
         'about': {
             'title': 'À Propos',
-            'role': 'Data Scientist',
+            'role': 'Ingénieur IA',
             'bio': [
-                'Je dispose de 5 années d\'expérience dans le développement de modèles de Machine Learning et la mise en place de solutions d\'Intelligence Artificielle.',
-                'Je suis passionné par les sujets liés à l\'IA générative, l\'analyse de données et la modélisation statistique.',
-                'J\'ai démontré ma capacité à concevoir des solutions innovantes telles que la classification de séries temporelles, la modélisation de graphes et les systèmes RAG.',
-                'Mon expertise couvre l\'ensemble de la chaîne de valeur data, de l\'acquisition à la mise en production, en passant par l\'analyse et la visualisation.'
+                'Ingénieur IA avec 5 années d\'expérience, spécialisé dans la conception de systèmes d\'IA end-to-end, le développement de pipelines LLM et l\'architecture de solutions RAG.',
+                'Je suis passionné par l\'IA générative, le traitement du langage naturel et la mise en production de solutions robustes et scalables.',
+                'J\'ai démontré ma capacité à concevoir et piloter des produits IA de A à Z, notamment des architectures RAG hybrides, des sys­tèmes de retro-documentation intelligente et des modèles de graphes.',
+                'Mon expertise couvre l\'ensemble de la chaîne de valeur data, de l\'acquisition à l\'industrialisation, en passant par l\'ingénierie LLM, l\'évaluation et le déploiement.'
             ]
         },
         'activity': {
@@ -52,6 +57,35 @@ LANGUAGES = {
         'skills': {
             'title': 'Domaines d\'expertise'
         },
+        'metrics': [
+            {'value': '5+', 'label': 'Années d\'expérience'},
+            {'value': '+50 TB', 'label': 'Données migrées (DGFIP)'},
+            {'value': '+25 000', 'label': 'Documents indexés (RAG)'},
+            {'value': '< 7 s', 'label': 'Temps de réponse RAG'},
+            {'value': '2', 'label': 'Data Scientists encadrés'},
+        ],
+        'services': {
+            'title': 'Services',
+            'subtitle': 'Trois offres concrètes pour transformer vos données en valeur.',
+            'cta': 'Discutons de votre projet',
+            'cards': [
+                {
+                    'icon': 'fas fa-drafting-compass',
+                    'title': 'Audit & Architecture IA',
+                    'description': 'Évaluation de votre stack actuelle, définition d\'une architecture RAG/LLM adaptée à vos besoins, état de l\'art et recommandations technologiques.'
+                },
+                {
+                    'icon': 'fas fa-code',
+                    'title': 'Développement & Intégration',
+                    'description': 'Conception et développement de pipelines LLM complets, APIs scalables, systèmes RAG hybrides et déploiement en production.'
+                },
+                {
+                    'icon': 'fas fa-users-cog',
+                    'title': 'Lead Technique & Accompagnement',
+                    'description': 'Pilotage de product IA, encadrement d\'équipes, revue de code, POC, et transfert de compétences sur les technologies IA modernes.'
+                }
+            ]
+        },
         'experiences': {
             'title': 'Expériences',
             'formation_title': 'Formation',
@@ -59,18 +93,33 @@ LANGUAGES = {
             'previous': 'Précédente',
             'technical_environment': 'Environnement technique',
             'companies': {
+                'aquila': {
+                    'name': 'AQUILA DATA',
+                    'roles': [
+                        {
+                            'title': 'AI Engineer – ADP GSI (Rétro-documentation Paie)',
+                            'missions': [
+                                'Lead technique du produit IA « Retrodocpaie » : conception from scratch d\'une API scalable validée par les experts ADP. Encadrement de deux Data Scientists juniors.',
+                                'Pipeline LLM : génération unitaire et batch de règles de paie (GPT-4.1, Claude Sonnet 4.5), gestion avancée des limites TPM, module d\'évaluation automatique de la qualité (60-90 s par règle).',
+                                'Architecture RAG hybride : pipelines d\'ingestion Elasticsearch / Amazon OpenSearch, recherche vectorielle + BM25, reranking, validation Pydantic, prompts de sécurité stricts. Temps de réponse < 7 secondes.',
+                                'Observabilité & industrialisation : monitoring et traçabilité bout-en-bout du pipeline RAG, conteneurisation Docker, déploiement via Artifactory ADP. Développement d\'une application frontend autonome pour les tests et la validation UX.'
+                            ],
+                            'tech': 'Python, GPT-4.1, Claude Sonnet 4.5, Elasticsearch, Amazon OpenSearch, Docker, Pydantic, FastAPI'
+                        }
+                    ]
+                },
                 'cgi': {
                     'name': 'CGI FRANCE',
                     'roles': [
                         {
                             'title': 'Consultant Data - DGFIP (FINANCES PUBLIQUES)',
                             'missions': [
-                                'Accompagnement & conduite du changement : support des agents DGFIP pour la migration des scripts legacy vers Python.',
-                                'Développement Python : conception de packages pour automatiser la migration des données et du code SAS.',
-                                'Migration & architecture cloud : transfert des données et conception d\'une architecture intermédiaire vers une cible cloud.',
-                                'Analyses métiers & conseil : identification des besoins, optimisation des processus et recommandations de bonnes pratiques.'
+                                'Migration de base de code SAS vers Python (Spark et Polars) : conception de connecteurs personnalisés lecture/écriture.',
+                                'Développement et packaging de modules Python pour l\'analyse statistique des données DGFIP.',
+                                'Orchestration et migration de base de données vers Spark (+50 TB) avec double-run pour assurer la disponibilité des données.',
+                                'Accompagnement & conduite du changement : support des agents DGFIP pour la migration des scripts legacy vers Python.'
                             ],
-                            'tech': 'Python'
+                            'tech': 'Python, PySpark, Polars'
                         },
                         {
                             'title': 'Data Scientist - MONNOYEUR',
@@ -206,22 +255,24 @@ LANGUAGES = {
             'presentation': 'About',
             'activity': 'Activity',
             'experiences': 'Experience',
-            'projects': 'Projects',
+            'services': 'Services',
             'contact': 'Contact'
         },
         'hero': {
-            'typed_text': ['AI ENGINEERING', 'DATA ANALYTICS', 'INNOVATION'],
-            'subtitle': '"Data is the new oil, but unlike oil, the more you share it, the more valuable it becomes!" 🚀',
-            'cta_text': 'Discover my profile'
+            'typed_text': ['AI ARCHITECT', 'LLM & RAG PIPELINES', 'TECHNICAL LEAD'],
+            'subtitle': 'You have a business problem. I build the AI system that solves it — from architecture to deployment.',
+            'cta_text': 'Discover my profile',
+            'cta_download': 'Download my CV',
+            'cta_linkedin': 'Connect on LinkedIn'
         },
         'about': {
             'title': 'About Me',
-            'role': 'Data Scientist',
+            'role': 'AI Engineer',
             'bio': [
-                'I have 5 years of experience in developing Machine Learning models and implementing Artificial Intelligence solutions.',
-                'I am passionate about generative AI, data analysis, and statistical modeling.',
-                'I have demonstrated my ability to design innovative solutions such as time series classification, graph modeling, and RAG systems.',
-                'My expertise covers the entire data value chain, from acquisition to production deployment, including analysis and visualization.'
+                'AI Engineer with more than 5 years of experience, specialized in designing end-to-end AI systems, LLM pipeline development, and RAG solution architecture.',
+                'I am passionate about generative AI, natural language processing, and deploying robust, scalable solutions to production.',
+                'I have demonstrated my ability to lead and build AI products from scratch, including hybrid RAG architectures, intelligent retro-documentation systems, and graph models.',
+                'My expertise covers the entire data value chain, from acquisition to industrialization, including LLM engineering, evaluation, and deployment.'
             ]
         },
         'activity': {
@@ -233,6 +284,35 @@ LANGUAGES = {
         'skills': {
             'title': 'Areas of Expertise'
         },
+        'metrics': [
+            {'value': '5+', 'label': 'Years of experience'},
+            {'value': '+50 TB', 'label': 'Data migrated (DGFIP)'},
+            {'value': '+25,000', 'label': 'Documents indexed (RAG)'},
+            {'value': '< 7 s', 'label': 'RAG response time'},
+            {'value': '2', 'label': 'Junior Data Scientists mentored'},
+        ],
+        'services': {
+            'title': 'Services',
+            'subtitle': 'Three concrete offerings to turn your data into value.',
+            'cta': 'Let\'s discuss your project',
+            'cards': [
+                {
+                    'icon': 'fas fa-drafting-compass',
+                    'title': 'AI Audit & Architecture',
+                    'description': 'Assessment of your current stack, definition of a RAG/LLM architecture tailored to your needs, state-of-the-art review and technology recommendations.'
+                },
+                {
+                    'icon': 'fas fa-code',
+                    'title': 'Development & Integration',
+                    'description': 'End-to-end LLM pipeline design and development, scalable APIs, hybrid RAG systems and production deployment.'
+                },
+                {
+                    'icon': 'fas fa-users-cog',
+                    'title': 'Technical Lead & Coaching',
+                    'description': 'AI product leadership, team mentoring, code review, POC delivery, and skills transfer on modern AI technologies.'
+                }
+            ]
+        },
         'experiences': {
             'title': 'Experience',
             'formation_title': 'Education',
@@ -240,18 +320,33 @@ LANGUAGES = {
             'previous': 'Previous',
             'technical_environment': 'Technical Environment',
             'companies': {
+                'aquila': {
+                    'name': 'AQUILA DATA',
+                    'roles': [
+                        {
+                            'title': 'AI Engineer – ADP GSI (Payroll Retro-Documentation)',
+                            'missions': [
+                                'Technical lead of the “Retrodocpaie” AI product: from-scratch design of a scalable API, validated by ADP technical experts. Daily mentoring of two junior Data Scientists.',
+                                'LLM pipeline: unit and batch generation of payroll rules (GPT-4.1, Claude Sonnet 4.5), advanced TPM limit management, automatic quality evaluation module (60-90 s per rule).',
+                                'Hybrid RAG architecture: ingestion pipelines on Elasticsearch / Amazon OpenSearch, vector + BM25 hybrid search, reranking, Pydantic validation, strict security prompts. End-to-end response time < 7 seconds.',
+                                'Observability & industrialization: full API monitoring and end-to-end RAG pipeline traceability, Docker containerization and deployment via ADP Artifactory. Development of a standalone frontend application for testing and UX validation.'
+                            ],
+                            'tech': 'Python, GPT-4.1, Claude Sonnet 4.5, Elasticsearch, Amazon OpenSearch, Docker, Pydantic, FastAPI'
+                        }
+                    ]
+                },
                 'cgi': {
                     'name': 'CGI FRANCE',
                     'roles': [
                         {
                             'title': 'Data Consultant - DGFIP (PUBLIC FINANCES)',
                             'missions': [
-                                'Change management & support: assistance to DGFIP agents for legacy script migration to Python.',
-                                'Python development: design of packages to automate data and SAS code migration.',
-                                'Cloud migration & architecture: data transfer and design of intermediate architecture towards cloud target.',
-                                'Business analysis & consulting: needs identification, process optimization and best practices recommendations.'
+                                'SAS codebase migration to Python (Spark and Polars): design of custom read/write connectors.',
+                                'Development and packaging of Python modules for statistical analysis of DGFIP data.',
+                                'Database orchestration and migration to Spark (+50 TB) with double-run to ensure data availability.',
+                                'Change management & support: assistance to DGFIP agents for legacy script migration to Python.'
                             ],
-                            'tech': 'Python'
+                            'tech': 'Python, PySpark, Polars'
                         },
                         {
                             'title': 'Data Scientist - MONNOYEUR',
@@ -428,6 +523,15 @@ def send_email(name, email, message):
         print(traceback.format_exc())
         return False, f"Erreur lors de l'envoi: {str(e)}"
 
+@app.route('/cv/download')
+def download_cv():
+    return send_from_directory(
+        os.path.join(app.root_path, 'static', 'folder'),
+        'CV_Sem_EGLOH LOKOH.pdf',
+        as_attachment=True,
+        download_name='CV_Sem_EGLOH_LOKOH.pdf'
+    )
+
 @app.route('/')
 def index():
     lang = request.args.get('lang', 'fr')
@@ -486,7 +590,6 @@ def contact():
         }), 500
 
 if __name__ == '__main__':
-    # Configuration pour la production
-    port = int(os.environ.get('PORT', 5000))
-    debug_mode = os.environ.get('FLASK_ENV') == 'development'
-    app.run(host='0.0.0.0', port=port, debug=debug_mode)
+    port = int(os.environ.get('PORT'))
+    debug_mode = os.environ.get('ENVIRONMENT') == 'development'
+    app.run(host='0.0.0.0', port=port, debug=debug_mode, use_reloader=debug_mode)

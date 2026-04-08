@@ -35,13 +35,10 @@
                         <a href="#presentation" class="nav__link">{{ texts.nav.presentation }}</a>
                     </li>
                     <li class="nav__item">
-                        <a href="#activity" class="nav__link">{{ texts.nav.activity }}</a>
-                    </li>
-                    <li class="nav__item">
                         <a href="#experiences" class="nav__link">{{ texts.nav.experiences }}</a>
                     </li>
                     <li class="nav__item">
-                        <a href="#projects" class="nav__link">{{ texts.nav.projects }}</a>
+                        <a href="#services" class="nav__link">{{ texts.nav.services }}</a>
                     </li>
                     <li class="nav__item">
                         <a href="#contact" class="nav__link nav__cta">{{ texts.nav.contact }}</a>
@@ -70,10 +67,20 @@
                     <span id="typed-text"></span>
                 </h1>
                 <p class="hero__subtitle">{{ texts.hero.subtitle }}</p>
-                <a href="#presentation" class="hero__cta">
-                    <span>{{ texts.hero.cta_text }}</span>
-                    <i class="fas fa-arrow-down"></i>
-                </a>
+                <div class="hero__ctas">
+                    <a href="#presentation" class="hero__cta hero__cta--primary">
+                        <span>{{ texts.hero.cta_text }}</span>
+                        <i class="fas fa-arrow-down"></i>
+                    </a>
+                    <a href="/cv/download" class="hero__cta hero__cta--secondary" download>
+                        <i class="fas fa-file-download"></i>
+                        <span>{{ texts.hero.cta_download }}</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/sem-egloh-lokoh" class="hero__cta hero__cta--outline" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i>
+                        <span>{{ texts.hero.cta_linkedin }}</span>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -115,33 +122,41 @@
         </div>
     </section>
 
-    <!-- Activity Section -->
-    <section class="activity section" id="activity">
+    <!-- Metrics Section -->
+    <section class="metrics section">
         <div class="container">
-            <h2 class="section__title">{{ texts.activity.title }}</h2>
-            
-            <div class="activity__container">
-                <div class="activity__content">
-                    <div class="activity__header">
-                        <h3 class="activity__name">
-                            <a href="{{ texts.activity.link }}" target="_blank" rel="noopener noreferrer" class="activity__link">
-                                {{ texts.activity.name }}
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </h3>
-                    </div>
-                    
-                    <div class="activity__description">
-                        <p class="activity__text">{{ texts.activity.description }}</p>
-                    </div>
-                    
-                    <div class="activity__actions">
-                        <a href="{{ texts.activity.link }}" target="_blank" rel="noopener noreferrer" class="activity__btn">
-                            <i class="fas fa-globe"></i>
-                            <span>Visiter le site</span>
-                        </a>
-                    </div>
+            <div class="metrics__grid">
+                {% for metric in texts.metrics %}
+                <div class="metric__card">
+                    <span class="metric__value">{{ metric.value }}</span>
+                    <span class="metric__label">{{ metric.label }}</span>
                 </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services section" id="services">
+        <div class="container">
+            <h2 class="section__title">{{ texts.services.title }}</h2>
+            <p class="services__subtitle">{{ texts.services.subtitle }}</p>
+            <div class="services__grid">
+                {% for item in texts.services.cards %}
+                <div class="service__card">
+                    <div class="service__icon">
+                        <i class="{{ item.icon }}"></i>
+                    </div>
+                    <h3 class="service__title">{{ item.title }}</h3>
+                    <p class="service__description">{{ item.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="services__cta">
+                <a href="#contact" class="services__btn">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>{{ texts.services.cta }}</span>
+                </a>
             </div>
         </div>
     </section>
@@ -153,12 +168,36 @@
             
             <div class="experience__container">
                 <div class="experience__cards">
+                    <!-- AQUILA DATA -->
+                    <div class="experience__card" data-experience="aquila">
+                        <div class="card__header">
+                            <div class="card__company">
+                                <h3>{{ texts.experiences.companies.aquila.name }}</h3>
+                                <span class="card__badge card__badge--current">{{ texts.experiences.present }}</span>
+                            </div>
+                            <i class="fas fa-chevron-down card__toggle"></i>
+                        </div>
+                        <div class="card__content">
+                            {% for role in texts.experiences.companies.aquila.roles %}
+                            <div class="card__role">
+                                <h4>{{ role.title }}</h4>
+                                <ul class="card__missions">
+                                    {% for mission in role.missions %}
+                                    <li>{{ mission }}</li>
+                                    {% endfor %}
+                                </ul>
+                                <p class="card__tech"><strong>{{ texts.experiences.technical_environment }} :</strong> {{ role.tech }}</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
                     <!-- CGI FRANCE -->
                     <div class="experience__card" data-experience="cgi">
                         <div class="card__header">
                             <div class="card__company">
                                 <h3>{{ texts.experiences.companies.cgi.name }}</h3>
-                                <span class="card__badge card__badge--current">{{ texts.experiences.present }}</span>
+                                <span class="card__badge card__badge--previous">{{ texts.experiences.previous }}</span>
                             </div>
                             <i class="fas fa-chevron-down card__toggle"></i>
                         </div>
@@ -293,124 +332,29 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section class="projects section" id="projects">
-        <div class="container">
-            <h2 class="section__title">{{ texts.projects.title }}</h2>
-            
-            <div class="projects__filters">
-                <button class="filter__btn active" data-filter="all">{{ texts.projects.all }}</button>
-                <button class="filter__btn" data-filter="osint">{{ texts.projects.osint }}</button>
-                <button class="filter__btn" data-filter="ai">{{ texts.projects.ai }}</button>
-                <button class="filter__btn" data-filter="web">{{ texts.projects.web }}</button>
-            </div>
-
-            <div class="projects__container">
-                <div class="project__card" data-category="osint ai">
-                    <div class="project__image">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                    <div class="project__content">
-                        <h3 class="project__title">OSINT Graph Explorer</h3>
-                        <p class="project__description">
-                            OSINT Graph Explorer is a cutting-edge application designed for Open Source Intelligence (OSINT) gathering. 
-                            It crawls the internet to collect information about individuals and companies, then visualizes this data in an 
-                            interactive graph and dashboard. This tool is invaluable for researchers, investigative journalists, and security 
-                            professionals who need to uncover connections and gather insights from publicly available data.
-                        </p>
-                        <div class="project__tags">
-                            <span class="project__tag">Python</span>
-                            <span class="project__tag">Graph Analysis</span>
-                            <span class="project__tag">OSINT</span>
-                            <span class="project__tag">Data Visualization</span>
-                        </div>
-                        <div class="project__links">
-                            <a href="https://github.com/SemPhares/osint_crawler" class="project__link" target="_blank">
-                                <i class="fab fa-github"></i>
-                                <span>Code source</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project__card" data-category="ai web">
-                    <div class="project__image">
-                        <i class="fas fa-language"></i>
-                    </div>
-                    <div class="project__content">
-                        <h3 class="project__title">Document Translator</h3>
-                        <p class="project__description">
-                            Document Translator is an application designed to translate documents effortlessly using advanced AI models 
-                            from Gemini or OpenAI Chat. This tool simplifies the process of translating various document formats, 
-                            providing users with quick and accurate translations.
-                        </p>
-                        <div class="project__tags">
-                            <span class="project__tag">Python</span>
-                            <span class="project__tag">AI Translation</span>
-                            <span class="project__tag">Gemini</span>
-                            <span class="project__tag">OpenAI</span>
-                            <span class="project__tag">Document Processing</span>
-                        </div>
-                        <div class="project__links">
-                            <a href="https://github.com/SemPhares/document_translator" class="project__link" target="_blank">
-                                <i class="fab fa-github"></i>
-                                <span>Code source</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Contact Section -->
     <section class="contact section" id="contact">
         <div class="container">
             <h2 class="section__title">{{ texts.contact.title }}</h2>
-            
-            <div class="contact__container">
-                <div class="contact__form">
-                    <form id="contact-form" class="form">
-                        <div class="form__group">
-                            <label for="name" class="form__label">{{ texts.contact.name }}</label>
-                            <input type="text" id="name" name="name" class="form__input" required>
-                        </div>
-                        
-                        <div class="form__group">
-                            <label for="email" class="form__label">{{ texts.contact.email }}</label>
-                            <input type="email" id="email" name="email" class="form__input" required>
-                        </div>
-                        
-                        <div class="form__group">
-                            <label for="message" class="form__label">{{ texts.contact.message }}</label>
-                            <textarea id="message" name="message" class="form__textarea" rows="5" required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="form__submit">
-                            <span>{{ texts.contact.send }}</span>
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </form>
-                </div>
-                
-                <div class="contact__info">
-                    <div class="contact__social">
-                        <h3>{{ texts.contact.social_title }}</h3>
-                        <div class="social__links">
-                            <a href="https://www.linkedin.com/in/sem-egloh-lokoh" class="social__link" target="_blank">
-                                <i class="fab fa-linkedin"></i>
-                                <span>LinkedIn</span>
-                            </a>
-                            <a href="https://github.com/SemPhares" class="social__link" target="_blank">
-                                <i class="fab fa-github"></i>
-                                <span>GitHub</span>
-                            </a>
-                            <a href="mailto:sem_phares@yahoo.com" class="social__link">
-                                <i class="fas fa-envelope"></i>
-                                <span>Email</span>
-                            </a>
-                        </div>
-                    </div>
+            <div class="contact__centered">
+                <h3 class="contact__social-title">{{ texts.contact.social_title }}</h3>
+                <div class="social__links">
+                    <a href="https://www.linkedin.com/in/sem-egloh-lokoh" class="social__link" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/SemPhares" class="social__link" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="mailto:sem_phares@yahoo.com" class="social__link">
+                        <i class="fas fa-envelope"></i>
+                        <span>sem_phares@yahoo.com</span>
+                    </a>
+                    <a href="tel:+33752510229" class="social__link">
+                        <i class="fas fa-phone"></i>
+                        <span>07 52 51 02 29</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -422,9 +366,6 @@
             <div class="footer__content">
                 <p class="footer__copy">
                     {{ texts.footer.copyright }}
-                </p>
-                <p class="footer__email">
-                    <a href="mailto:sem_phares@yahoo.com">sem_phares@yahoo.com</a>
                 </p>
             </div>
         </div>
